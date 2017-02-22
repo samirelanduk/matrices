@@ -56,6 +56,26 @@ class Matrix:
         return Matrix(*new_rows)
 
 
+    def __mul__(self, other):
+        if isinstance(other, Matrix):
+            if not can_multiply(self, other):
+                raise MatrixError("Cannot multiply %s and %s." % (str(self), str(other)))
+            new_rows = []
+            columns = other.columns()
+            for rindex, row in enumerate(self._rows):
+                new_row = []
+                for column in columns:
+                    new_row.append(sum([val * column[index] for index, val in enumerate(row)]))
+                new_rows.append(new_row)
+            return Matrix(*new_rows)
+        else:
+            return Matrix(*[[val * other for val in row] for row in self._rows])
+
+
+    def __rmul__(self, other):
+        return Matrix(*[[val * other for val in row] for row in self._rows])
+
+
     def rows(self):
         return self._rows
 
