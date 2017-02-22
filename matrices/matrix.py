@@ -21,6 +21,15 @@ class Matrix:
         return "<Matrix (%i×%i)>" % (len(self._rows), len(self._rows[0]))
 
 
+    def __eq__(self, other):
+        if not isinstance(other, Matrix) or self.size() != other.size():
+            return False
+        for index, row in enumerate(self._rows):
+            if row != other._rows[index]:
+                return False
+        return True
+
+
     def rows(self):
         return self._rows
 
