@@ -1,3 +1,5 @@
+from .exceptions import MatrixError
+
 class Matrix:
 
     def __init__(self, *rows):
@@ -30,6 +32,30 @@ class Matrix:
         return True
 
 
+    def __add__(self, other):
+        if not can_add(self, other):
+            raise MatrixError("Cannot add %s and %s." % (str(self), str(other)))
+        new_rows = []
+        for rindex, row in enumerate(self._rows):
+            other_row = other._rows[rindex]
+            new_row = [val + other_row[vindex] for vindex, val in enumerate(row)]
+            new_rows.append(new_row)
+        return Matrix(*new_rows)
+
+
+    def __sub__(self, other):
+        if not can_add(self, other):
+            raise MatrixError(
+             "Cannot subtract %s from %s." % (str(other), str(self))
+            )
+        new_rows = []
+        for rindex, row in enumerate(self._rows):
+            other_row = other._rows[rindex]
+            new_row = [val - other_row[vindex] for vindex, val in enumerate(row)]
+            new_rows.append(new_row)
+        return Matrix(*new_rows)
+
+
     def rows(self):
         return self._rows
 
@@ -42,3 +68,12 @@ class Matrix:
 
     def size(self):
         return (len(self.rows()), len(self.columns()))
+
+
+
+def can_add(matrix1, matrix2):
+    return matrix1.size() == matrix2.size()
+
+
+def can_multiply(matrix1, matrix2):
+    return matrix1.size()[1] == matrix2.size()[0]
