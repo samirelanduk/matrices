@@ -19,3 +19,17 @@ class Matrix:
 
     def __repr__(self):
         return "<Matrix (%i×%i)>" % (len(self._rows), len(self._rows[0]))
+
+
+    def rows(self):
+        return self._rows
+
+
+    def columns(self):
+        return tuple([tuple(
+         [row[n] for row in self._rows]
+        ) for n in range(len(self._rows[0]))])
+
+
+    def size(self):
+        return (len(self.rows()), len(self.columns()))
