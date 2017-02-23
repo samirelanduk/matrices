@@ -1,6 +1,18 @@
+"""Contains the core Matrix class and its methods."""
+
 from .exceptions import MatrixError
 
 class Matrix:
+    """Represents a matrix.
+
+    Matrices can be added using the ``+`` operator, and multuplied using the
+    ``*`` operator to get the dot product. They also support scalar
+    multiplication.
+
+    Two matrices are considered equal by the ``==`` operator if they have the
+    same size, and equivalent values at each position.
+
+    :param \*rows: The rows for the matrix."""
 
     def __init__(self, *rows):
         if not rows:
@@ -33,6 +45,7 @@ class Matrix:
 
 
     def __add__(self, other):
+        from .functions import can_add
         if not can_add(self, other):
             raise MatrixError("Cannot add %s and %s." % (str(self), str(other)))
         new_rows = []
@@ -44,6 +57,7 @@ class Matrix:
 
 
     def __sub__(self, other):
+        from .functions import can_add
         if not can_add(self, other):
             raise MatrixError(
              "Cannot subtract %s from %s." % (str(other), str(self))
@@ -57,6 +71,7 @@ class Matrix:
 
 
     def __mul__(self, other):
+        from .functions import can_multiply
         if isinstance(other, Matrix):
             if not can_multiply(self, other):
                 raise MatrixError("Cannot multiply %s and %s." % (str(self), str(other)))
@@ -77,23 +92,26 @@ class Matrix:
 
 
     def rows(self):
+        """Returns the Matrix's rows.
+
+        :rtype: ``tuple``"""
+
         return self._rows
 
 
     def columns(self):
+        """Returns the Matrix's columns.
+
+        :rtype: ``tuple``"""
+
         return tuple([tuple(
          [row[n] for row in self._rows]
         ) for n in range(len(self._rows[0]))])
 
 
     def size(self):
+        """Returns the Matrix's size in (rows, columns) notation.
+
+        :rtype: ``tuple``"""
+
         return (len(self.rows()), len(self.columns()))
-
-
-
-def can_add(matrix1, matrix2):
-    return matrix1.size() == matrix2.size()
-
-
-def can_multiply(matrix1, matrix2):
-    return matrix1.size()[1] == matrix2.size()[0]

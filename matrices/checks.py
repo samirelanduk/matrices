@@ -10,7 +10,7 @@ def is_numeric(number):
     correctness is a wonderful thing, generally this is not what one would
     expect a check for numbers to do.
 
-    :param number: The object to check.
+    :param Number: The object to check.
     :rtype: ``bool``"""
 
     if isinstance(number, bool):

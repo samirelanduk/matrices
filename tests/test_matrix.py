@@ -1,6 +1,6 @@
 from unittest import TestCase
-from unittest.mock import patch, Mock
-from matrices.matrix import Matrix, can_add, can_multiply
+from unittest.mock import patch
+from matrices.matrix import Matrix
 from matrices.exceptions import MatrixError
 
 class MatrixCreationTests(TestCase):
@@ -74,14 +74,6 @@ class MatrixEquality(TestCase):
 
 class MatrixAdditionTests(TestCase):
 
-    def test_can_add_function(self):
-        matrix1 = Matrix((1, 2, 3), (4, 5, 6))
-        matrix2 = Matrix((1, 2, 3), (4, 5, 6))
-        self.assertTrue(can_add(matrix1, matrix2))
-        matrix2 = Matrix((1, 2, 3, 3.5), (4, 5, 6, 6.5))
-        self.assertFalse(can_add(matrix1, matrix2))
-
-
     def test_can_add_matrices(self):
         matrix1 = Matrix((1, 2, 3), (4, 5, 6))
         matrix2 = Matrix((1, 2, 3), (4, 5, 6))
@@ -89,7 +81,7 @@ class MatrixAdditionTests(TestCase):
         self.assertEqual(matrix3.rows(), ((2, 4, 6), (8, 10, 12)))
 
 
-    @patch("matrices.matrix.can_add")
+    @patch("matrices.functions.can_add")
     def test_cannot_add_if_function_says_no(self, mock_check):
         mock_check.return_value = False
         matrix1 = Matrix((1, 2, 3), (4, 5, 6))
@@ -105,7 +97,7 @@ class MatrixAdditionTests(TestCase):
         self.assertEqual(matrix3.rows(), ((-1, 6, -3), (-9, 7, 9)))
 
 
-    @patch("matrices.matrix.can_add")
+    @patch("matrices.functions.can_add")
     def test_cannot_add_if_function_says_no(self, mock_check):
         mock_check.return_value = False
         matrix1 = Matrix((-1, 2, 0), (0, 3, 6))
@@ -117,17 +109,6 @@ class MatrixAdditionTests(TestCase):
 
 class MatrixMultiplicationTests(TestCase):
 
-    def test_can_multiply_function(self):
-        matrix1 = Mock(Matrix)
-        matrix2 = Mock(Matrix)
-        matrix1.size.return_value = (4, 3)
-        matrix2.size.return_value = (3, 2)
-        self.assertTrue(can_multiply(matrix1, matrix2))
-        matrix1.size.return_value = (3, 4)
-        matrix2.size.return_value = (2, 3)
-        self.assertFalse(can_multiply(matrix1, matrix2))
-
-
     def test_can_multiply_matrices(self):
         matrix1 = Matrix((1, 2, 3), (4, 5, 6))
         matrix2 = Matrix((7, 8), (9, 10), (11, 12))
@@ -135,7 +116,7 @@ class MatrixMultiplicationTests(TestCase):
         self.assertEqual(matrix3.rows(), ((58, 64), (139, 154)))
 
 
-    @patch("matrices.matrix.can_multiply")
+    @patch("matrices.functions.can_multiply")
     def test_cannot_multiply_if_function_says_no(self, mock_check):
         mock_check.return_value = False
         matrix1 = Matrix((1, 2, 3), (4, 5, 6))
