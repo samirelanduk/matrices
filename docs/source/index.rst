@@ -1,20 +1,19 @@
-.. matrices documentation master file, created by
-   sphinx-quickstart on Fri Feb 24 00:24:22 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+matrices
+========
 
-Welcome to matrices's documentation!
-====================================
+matrices is a pure-python matrix processing package with no C dependencies.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+Example
+-------
 
+  >>> import matrices
+  >>> matrix = matrices.Matrix([1, 2], [3, 4], [5, 6])
+  >>> matrix
+  <Matrix (3×2)>
+  >>> matrix.size()
+  (3, 2)
 
+Table of Contents
+-----------------
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree ::
