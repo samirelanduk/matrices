@@ -42,8 +42,8 @@ Overview
 Creating a matrix
 ~~~~~~~~~~~~~~~~~
 
-The ``Matrix`` class is used to represent matrices. Just pass them
-rows as arguments:
+The ``Matrix`` class is used to represent matrices. Just pass it
+rows as positional arguments:
 
   >>> import matrices
   >>> matrix = matrices.Matrix([1, 2], [3, 4], [5, 6])
