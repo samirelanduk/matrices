@@ -74,13 +74,17 @@ class Matrix:
         from .functions import can_multiply
         if isinstance(other, Matrix):
             if not can_multiply(self, other):
-                raise MatrixError("Cannot multiply %s and %s." % (str(self), str(other)))
+                raise MatrixError(
+                 "Cannot multiply %s and %s." % (str(self), str(other))
+                )
             new_rows = []
             columns = other.columns()
             for rindex, row in enumerate(self._rows):
                 new_row = []
                 for column in columns:
-                    new_row.append(sum([val * column[index] for index, val in enumerate(row)]))
+                    new_row.append(
+                     sum([val * column[index] for index, val in enumerate(row)])
+                    )
                 new_rows.append(new_row)
             return Matrix(*new_rows)
         else:

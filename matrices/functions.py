@@ -18,7 +18,7 @@ def can_add(matrix1, matrix2):
 
     :param Matrix matrix1: the first matrix.
     :param Matrix matrix2: the second matrix.
-    :rtype: ``boolean``"""
+    :rtype: ``bool``"""
 
     return matrix1.size() == matrix2.size()
 
@@ -29,6 +29,6 @@ def can_multiply(matrix1, matrix2):
 
     :param Matrix matrix1: the first matrix.
     :param Matrix matrix2: the second matrix.
-    :rtype: ``boolean``"""
+    :rtype: ``bool``"""
 
     return matrix1.size()[1] == matrix2.size()[0]
