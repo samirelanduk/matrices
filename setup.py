@@ -4,7 +4,7 @@ setup(
  name="matrices",
  version="0.1.0",
  description="A pure-Python matrix processing library",
- url="https://matrices.samireland.com,
+ url="https://matrices.samireland.com",
  author="Sam Ireland",
  author_email="mail@samireland.com",
  license="MIT",
