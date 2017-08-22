@@ -29,5 +29,19 @@ class Vector:
         """Returns the length of the Vector.
 
         :rtype: ``int``"""
-        
+
         return len(self)
+
+
+    def dot(self, other):
+        """Returns the dot product between this vector and another.
+
+        :param Vector other: The other Vector.
+        :raises TypeError: If a non-Vector is given.
+        :rtype: ``float``"""
+
+        if not isinstance(other, Vector):
+            raise TypeError("{} is not a Vector".format(other))
+        if self.length() != other.length():
+            raise ValueError("{} and {} are not equal length".format(self, other))
+        return sum([u_i * v_i for u_i, v_i in zip(self._values, other._values)])

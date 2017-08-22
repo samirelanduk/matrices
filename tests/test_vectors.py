@@ -45,3 +45,28 @@ class VectorLengthTests(TestCase):
         vector = Vector(2, 5, 1)
         mock_len.return_value = 100
         self.assertEqual(vector.length(), 100)
+
+
+
+class VectorDotProductTest(TestCase):
+
+    def test_can_get_dot_product(self):
+        vector1 = Vector(-6, 8)
+        vector2 = Mock(Vector)
+        vector2._values = [5, 12]
+        vector2.length.return_value = 2
+        self.assertEqual(vector1.dot(vector2), 66)
+
+
+    def test_dot_product_requires_vector(self):
+        vector1 = Vector(-6, -8)
+        with self.assertRaises(TypeError):
+            vector1.dot("vector")
+
+
+    def test_dot_product_requires_equal_length(self):
+        vector1 = Vector(-6, 8)
+        vector2 = Mock(Vector)
+        vector2.length.return_value = 3
+        with self.assertRaises(ValueError):
+            vector1.dot(vector2)
