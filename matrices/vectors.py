@@ -15,3 +15,7 @@ class Vector:
                 self._values = list(values)
         else:
             self._values = list(values)
+
+
+    def __repr__(self):
+        return "<Vector {}>".format(self._values)
