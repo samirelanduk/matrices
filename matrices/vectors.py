@@ -19,3 +19,15 @@ class Vector:
 
     def __repr__(self):
         return "<Vector {}>".format(self._values)
+
+
+    def __len__(self):
+        return len(self._values)
+
+
+    def length(self):
+        """Returns the length of the Vector.
+
+        :rtype: ``int``"""
+        
+        return len(self)
